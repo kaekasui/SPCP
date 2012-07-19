@@ -5,6 +5,8 @@ source :rubygems
 # gem 'mysql2', '0.3.10'
 # gem 'sqlite3'
 gem 'pg', '~> 0.13.2'
+gem 'carrierwave'
+gem 'remotipart', '~> 1.0'
 
 # Allows easy switching between locally developed gems, and gems installed from rubygems.org
 # See README for more info at: https://github.com/ndbroadbent/bundler_local_development

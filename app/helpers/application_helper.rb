@@ -303,6 +303,16 @@ module ApplicationHelper
       page.assign 'Date.months', t('date.month_names')[1..-1]
     end
   end
+  
+  def image_for(model, args = {})
+    args = { :class => 'gravatar', :size => :large }.merge(args)
+    if model.avatar
+      Avatar
+      image_tag(model.avatar.image.url(args[:size]), args)
+    else
+      image_tag("avatar.jpg", args)
+    end
+  end
 
   # Users can upload their avatar, and if it's missing we're going to use
   # gravatar. For leads and contacts we always use gravatars.

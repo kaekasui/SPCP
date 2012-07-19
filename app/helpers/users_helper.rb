@@ -30,13 +30,15 @@ module UsersHelper
     end
   end
   
-  def owner_select(asset, users, myself)
+  def owner_select(asset, repositories, myself)
     puts 'user_select'
     puts asset
-    puts users
+    puts repositories
     puts myself
-    user_options = user_options_for_select(users, myself)
-    select(asset, :user_id, user_options,
+    user_options = repository_options_for_select(repositories, myself)
+    puts 'makit it past'
+    puts user_options
+    select(asset, :assigned_to, user_options,
            # { :include_blank => t(:unassigned) },
            { :style         => "width:160px"  })
   end
@@ -54,6 +56,10 @@ module UsersHelper
 
   def user_options_for_select(users, myself)
     users.map{|u| [u.full_name, u.id]}.prepend([t(:myself), myself.id])
+  end
+  
+  def repository_options_for_select(repositories, myself)
+    repositories.map{|u| [u.name, u.id]}.prepend([t(:myself), myself.class])
   end
 end
 

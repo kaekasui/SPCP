@@ -1,0 +1,13 @@
+# page.call "crm.flick", :empty, :toggle
+# page.call "crm.hide_form", :options if called_from_index_page?
+page.call "crm.flip_form", :create_repositories
+# 
+unless params[:cancel].true?
+  page[:create_repositories].replace_html :partial => "new"
+  page.call "crm.init_country_field"
+  page.call "crm.set_title", :create_repositories, t(:create_repositories)
+  # page.call "crm.create_or_select_account", request.referer =~ /\/accounts\// || @repositories.id.blank?
+  # hook(:new_repositories_rjs, self, :page => page)
+else
+  page.call "crm.set_title", :create_repositories, t(:repositoriess)
+end

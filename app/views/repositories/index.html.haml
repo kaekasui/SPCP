@@ -1,0 +1,22 @@
+= styles_for :repositories
+.title_tools
+  = link_to_inline(:create_repositories, new_repository_path, :text=> t(:create_repositories)) << " | "
+  - if Setting.advanced_search_enabled
+    / = link_to_inline(:advanced_search, advanced_search_contact_path, :text => t(:advanced_search)) << " | "
+  / = link_to_inline(:options, options_contact_path, :text=> t(:options))
+
+.title
+  %span#create_repositories_title #{t :repositories}
+  = image_tag("loading.gif", :size => :thumb, :id => "loading", :style => "display: none;")
+.remote#options{ hidden }
+.remote#advanced_search{ hidden_if(!params[:q]) }
+  - if params[:q]
+    = render :partial => "advanced_search"
+
+.remote#create_repositories{ hidden }
+
+.list#repositories
+  - if @repositories.any?
+    = render @repositories
+  - else
+    = render "shared/empty"

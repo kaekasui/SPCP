@@ -1,0 +1,69 @@
+= hook(:repositories_top_section, self, :f => f) do
+  .section
+    %table
+      %tr
+        %td
+          .label.top.req #{t :name}:
+          = f.text_field :name
+        %td= spacer
+        %td
+          .label.top #{t :email}:
+          = f.text_field :email
+      %tr
+        %td
+          = f.input :phone, :as => :string
+        %td= spacer
+        %td
+          = f.input :website, :as => :string
+          
+  .subtitle #{t :location_info}
+  .section
+    %table
+      %tr
+        %td{ :colspan => 3 }
+          .label.req #{t :street}:
+          = f.text_field :address
+        %td= spacer
+        %td{ :colspan => 3 }
+          .label.req #{t :city}:
+          = f.text_field :city
+      %tr
+        %td{ :colspan => 3 }
+          .label.req #{t :province}:
+          = f.text_field :province
+        %td= spacer
+        %td
+          .label.req #{t :postal}:
+          = f.text_field :postal, :style => "width:112px"
+        %td= spacer
+        %td{ :colspan => 3 }
+          .label.req #{t :country}:
+          = f.country_select(:country, nil, { :"Select a country" => "" }, {:"data-placeholder" => t(:select_a_country), :style => "width:150px; margin-top:6px"})
+        / %td
+        /   .label #{t :assigned_to}:
+        /   = owner_select(:repositories, @users, current_user)
+
+    / %table
+    /   = fields_for(@account) do |a|
+    /     = a.hidden_field :user_id
+    /     = a.hidden_field :assigned_to
+    /     = a.hidden_field :access, :value => Setting.default_access
+    /     %tr
+    /       %td
+    /         != account_select_or_create(a) do |options|
+    /           - # Add [-- None --] account choice when editing existing repositories that has an account.
+    /           - options[:include_blank] = "" unless @repositories.new_record? || @repositories.account.blank?
+    /       %td= spacer
+    /       %td
+    /         .label #{t :assigned_to}:
+    /         = user_select(:repositories, @users, current_user)
+    / 
+    /     - if Setting.background_info && Setting.background_info.include?(:repositories)
+    /       %tr
+    /         %td(colspan="3")
+    /           .label= t(:background_info) << ':'
+    /           = f.text_area :background_info, :style =>"width:500px", :rows => 3
+    / 
+    /     = render :partial => "/shared/tags", :locals => {:f => f, :span => 3}
+    / 
+    /     = hook(:repositories_top_section_bottom, self, :f => f)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120709021103) do
+ActiveRecord::Schema.define(:version => 20120712202033) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -200,10 +200,14 @@ ActiveRecord::Schema.define(:version => 20120709021103) do
     t.string   "name"
     t.string   "link"
     t.integer  "age"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "user_id"
     t.integer  "assigned_to"
+    t.integer  "equipmentable_id"
+    t.string   "equipmentable_type"
+    t.string   "image"
+    t.string   "avatar"
   end
 
   create_table "field_groups", :force => true do |t|
@@ -319,6 +323,20 @@ ActiveRecord::Schema.define(:version => 20120709021103) do
   end
 
   add_index "preferences", ["user_id", "name"], :name => "index_preferences_on_user_id_and_name"
+
+  create_table "repositories", :force => true do |t|
+    t.string   "name"
+    t.string   "city"
+    t.string   "country"
+    t.string   "address"
+    t.string   "postal"
+    t.string   "website"
+    t.string   "phone"
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "province"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

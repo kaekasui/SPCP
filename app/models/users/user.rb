@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
   has_many    :avatars                                         # As owner who uploaded it, ex. Contact avatar.
   has_many    :comments, :as => :commentable                   # As owner who crated a comment.
   has_many    :accounts
-  has_many    :equipment
+  has_many    :equipment, :as => :equipmentable
   has_many    :campaigns
   has_many    :leads
   has_many    :contacts

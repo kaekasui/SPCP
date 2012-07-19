@@ -1,0 +1,52 @@
+- gravatar_size = @current_user.preference[:contacts_outline] == "brief" ? "16x16" : "30x30"
+
+%li.highlight[repository]
+
+
+  %ul.tools
+    = hook(:repository_tools_before, self, :repository => repository)
+
+    - if can?(:update, repository)
+      %li= link_to_edit(repository)
+
+    - if shown_on_landing_page?
+      %li= link_to_discard(repository)
+
+    - if can?(:destroy, repository)
+      %li= link_to_delete(repository)
+
+  .indentslim
+    = link_to_if can?(:read, repository), repository.name, repository
+    %tt
+      - if repository.name? && repository.name?
+        == #{repository.name}, #{repository.name}
+      - else
+        = repository.name if repository.name?
+
+      - if (repository.name = repository.name)
+        == #{t :at} #{link_to_if can?(:read, repository), repository.name, repository_path(repository)}
+
+      - if (lead = repository.name)
+        &ndash;
+        == #{t :referred_by_small}
+
+    - unless @current_user.preference[:contacts_outline] == "brief"
+      %dt{ :style => "padding: 2px 0px 0px 0px" }
+        - if can?(:read, repository)
+          - if repository.name.present?
+            = link_to_email(repository.name)
+            |
+          - if repository.name.present?
+            == #{t :phone_small}:
+            %b= repository.name
+            |
+          - if repository.name.present?
+            == #{t :mobile_small}:
+            %b= contact.name
+            |
+        = t(:added_ago, time_ago_in_words(repository.created_at))
+      - if repository.name
+        %dt
+          .tags= repository.name
+
+      = hook(:repository_bottom, self, :repository => repository)

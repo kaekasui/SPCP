@@ -1,5 +1,18 @@
 Rails.application.routes.draw do
+  resources :equipment
+  
+  get 'equipment/upload_avatar'
+  # resources :equipment, :id => /\d+/ do
+  #   member do
+  #     get :avatar
+  #     put :upload_avatar
+  #   end
+  # end
 
+  resources :repositories do
+    resources :equipment
+  end
+  
   resources :lists
 
   root :to => 'home#index'
@@ -21,7 +34,7 @@ Rails.application.routes.draw do
   resources :comments
   resources :emails
   resources :passwords
-  resources :equipment
+  # resources :equipment
   
   # resources :equipment, :id => /\d+/ do
   #   collection do
