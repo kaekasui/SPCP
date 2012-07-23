@@ -325,6 +325,10 @@ var crm = {
     $("edit_task_" + id).onsubmit();
   },
 
+	al: function() {
+		alert("now");
+	},
+
   //----------------------------------------------------------------------------
   flick: function(element, action) {
 	console.log("flicking");

@@ -7,6 +7,7 @@ source :rubygems
 gem 'pg', '~> 0.13.2'
 gem 'carrierwave'
 gem 'remotipart', '~> 1.0'
+gem 'ancestry'
 
 # Allows easy switching between locally developed gems, and gems installed from rubygems.org
 # See README for more info at: https://github.com/ndbroadbent/bundler_local_development

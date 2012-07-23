@@ -1,17 +1,41 @@
 Rails.application.routes.draw do
-  resources :equipment
-  
-  get 'equipment/upload_avatar'
-  # resources :equipment, :id => /\d+/ do
-  #   member do
-  #     get :avatar
-  #     put :upload_avatar
-  #   end
-  # end
+  match "guides" => "guides#index"
+  match "free" => "free#index"
+  match "start" => "start#index"
+  match "help" => "help#index"
+  match "find" => "find#index"
+
 
   resources :repositories do
     resources :equipment
   end
+  
+  resources :equipment
+  
+  get 'equipment/upload_avatar'
+  resources :events, :id => /\d+/ do
+    collection do
+      get  :advanced_search
+      post :filter
+      get  :options
+      get  :field_group
+      post :auto_complete
+      post :redraw
+      get :versions
+    end
+    member do
+      put  :attach
+      post :discard
+      post :subscribe
+      post :unsubscribe
+      get :leads
+      get :opportunities
+    end
+  end
+  
+  match "/admin/equipment" => redirect("/equipment")
+  match "/admin/repository" => redirect("/repositories")
+  match "/admin/event" => redirect("/event")
   
   resources :lists
 

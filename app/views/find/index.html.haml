@@ -1,0 +1,7 @@
+%div{:id => "equipmentcontent"}
+  %table
+    %tr
+      %td
+        = render :partial => 'find/equipment', :collection => @equipment[0..@equipment.count/2]
+      %td
+        = render :partial => 'find/equipment', :collection => @equipment[@equipment.count/2 +1..@equipment.count]

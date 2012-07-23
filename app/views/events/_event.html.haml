@@ -1,0 +1,21 @@
+%li.highlight[event]
+  .strip{:class => event.status}= t(event.status)
+
+  %ul.tools
+    - if can?(:update, event)
+      %li= link_to_edit(event)
+
+    - if can?(:destroy, event)
+      %li= link_to_delete(event)
+
+  .indent
+    = link_to(event.name, event)
+    = render "events/status", :event => event
+
+    - unless @current_user.preference[:events_outline] == "brief"
+      = render "events/metrics", :event => event
+      - if event.tag_list.present?
+        %dt
+          .tags= tags_for_index(event)
+
+      = hook(:event_bottom, self, :event => event)

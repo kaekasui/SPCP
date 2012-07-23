@@ -1,0 +1,12 @@
+%div{:class => 'panel equipment-list'}
+  - if equipment.available?
+    .strip.active #{t :equipment_available}
+  - elsif !equipment.available
+    .strip.suspended #{t :equipment_suspended}
+  %h3= link_to equipment.name.capitalize, equipment_path(equipment)
+  %br/
+  = equipment.description
+  = equipment.owner.address
+  %p=  link_to equipment.owner.name, user_path(equipment.owner)
+  = image_tag equipment.avatar, :width => '60' if !equipment.avatar.blank?
+  %button Book it!

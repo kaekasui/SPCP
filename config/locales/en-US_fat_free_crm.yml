@@ -350,6 +350,47 @@ en-US:
   was_supposed_to_finish: was supposed to finish on %{value}
   was_supposed_to_start: was supposed to start %{time_ago} ago on %{start_date}
   was_supposed_to_start_in: was supposed to start in %{starts_in} on %{start_date}
+  
+  # Views -> Events.
+  #----------------------------------------------------------------------------
+  actual: Actual
+  actual_performance: Actual Performance
+  budget: Budget
+  budget_label: Budget ($)
+  event: Event
+  event_and_leads: event and its leads
+  event_small: event
+  event_summary: Event Summary
+  event_targets: Event Targets
+  events: Event
+  events_options: Events Options
+  events_small: events
+  conversion: Conversion
+  conversion_label: Conversion (%)
+  conversion_number: "%{value} conversion"
+  create_event: Create Event
+  end_date: End date
+  finished_on: completed on %{value}
+  finishes_in: finishes in %{value}
+  no_start_date: no start date specified
+  number_of_leads: Number of leads
+  objectives: Objectives
+  objectives_help: Please specify target number of leads, expected leads-to-opportunities conversion ratio, target revenue, and campaign budget. These numbers will let you track actual campaign performance.
+  objectives_small: campaign objectives
+  revenue: Revenue
+  revenue_label: Revenue ($)
+  revenue_number: "%{value} in revenue"
+  save_campaign: Save Campaign
+  start_date: Start date
+  started_ago: started %{value} ago
+  starts_in: starts in %{value}
+  starts_today: starts today!
+  target: Target
+  total_campaigns: Total Campaigns
+  was_supposed_to_finish: was supposed to finish on %{value}
+  was_supposed_to_start: was supposed to start %{time_ago} ago on %{start_date}
+  was_supposed_to_start_in: was supposed to start in %{starts_in} on %{start_date}
+  
 
   # Views -> Contacts.
   #----------------------------------------------------------------------------
@@ -363,6 +404,7 @@ en-US:
   create_contact: Add Contact
   create_equipment: Add equipment
   equipment: Equipment
+  equipment_available: Available
   department: Department
   department_small: '%{value} department'
   do_not_call: Do not call
@@ -532,6 +574,11 @@ en-US:
   create_repository: Create Repository
   
   equipments: Equipment
+  equipment_small: Equipment
+  image: Add Image
+  manufacturer: Manufacturer
+  description: Description
+  equipment_suspended: Not Available
   
 
   # Views -> Common.
@@ -658,7 +705,7 @@ en-US:
 
   # Views -> Admin
   #----------------------------------------------------------------------------
-  back_to_crm: Back to Fat Free CRM
+  back_to_crm: Back to SPCP
   crm_admin_page: Fat Free CRM Administration
 
   # Views -> Admin -> Users.

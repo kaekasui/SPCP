@@ -1,0 +1,91 @@
+.panel#summary
+  .caption #{t :event_summary}
+  %li
+    %dt= @event.starts_on ? l(@event.starts_on, :format => :mmdd) : t(:n_a)
+    %tt #{t :start_date}:
+  %li
+    %dt= @event.ends_on ? l(@event.ends_on, :format => :mmdd) : t(:n_a)
+    %tt #{t :end_date}:
+  %li
+    %dt= @event.status ? t(@event.status) : t(:n_a)
+    %tt #{t :status}:
+  %li.last
+    %dt= number_to_currency(@event.budget, :precision => 0) || t(:n_a)
+    %tt #{t :budget}:
+
+  .caption #{t :event_targets}
+
+  -# Target Leads.
+  -#---------------------------------------------------------------------------
+  %li
+    %dt= @event.target_leads || t(:n_a)
+    %tt #{t :leads}:
+
+  -# Target Conversion Ratio.
+  -#---------------------------------------------------------------------------
+  %li
+    %dt= number_to_percentage(@event.target_conversion, :precision => 1) || t(:n_a)
+    %tt #{t :conversion}:
+
+  -# Target Opportunities: calculated based on target number of leads and
+  -# expected conversion ratio.
+  -#---------------------------------------------------------------------------
+  %li
+    - if @event.target_leads.to_i > 0 && @event.target_conversion.to_i > 0
+      - opportunities = @event.target_leads * @event.target_conversion / 100
+      %dt= opportunities.to_i
+    - else
+      %dt N/A
+    %tt #{t :opportunities}:
+
+  -# Target Revenue.
+  -#---------------------------------------------------------------------------
+  %li.last
+    %dt= number_to_currency(@event.target_revenue, :precision => 0) || t(:n_a)
+    %tt #{t :revenue}:
+
+  .caption #{t :actual_performance}
+
+  -# Actual Number of Leads.
+  -#---------------------------------------------------------------------------
+  %li
+    %dt= @event.leads_count || t(:n_a)
+    %tt== #{t :leads}: #{performance(@event.leads_count, @event.target_leads)}
+
+  -# Actual Conversion Ratio: calculated based on actual number of leads
+  -# and opportunities.
+  -#---------------------------------------------------------------------------
+  %li
+    - if @event.opportunities_count.to_i > 0 && @event.leads_count.to_i > 0
+      - conversion = @event.opportunities_count * 100 / @event.leads_count
+      %dt= number_to_percentage(conversion, :precision => 1)
+      %tt== #{t :conversion}: #{performance(conversion, @event.target_conversion)}
+    - else
+      %dt #{t :n_a}
+      %tt #{t :conversion}:
+
+  -# Actual Opportunities.
+  -#---------------------------------------------------------------------------
+  %li
+    %dt= @event.opportunities_count || t(:n_a)
+    %tt
+      #{t :opportunities}:
+      = performance(@event.opportunities_count, opportunities)
+
+  -# Actual Revenue.
+  -#---------------------------------------------------------------------------
+  %li.last
+    %dt= number_to_currency(@event.revenue, :precision => 0) || t(:n_a)
+    %tt== #{t :revenue}: #{performance(@event.revenue, @event.target_revenue)}
+
+  - unless @event.background_info.blank?
+    .caption #{t :background_info}
+    = auto_link(simple_format @event.background_info).html_safe
+
+  = render "fields/sidebar_show", :asset => @event
+
+  - if @event.tag_list.present?
+    %dt
+      .tags= tags_for_index(@event)
+
+  = hook(:show_event_sidebar_bottom, self, :event => @event)

@@ -262,6 +262,13 @@ campaign_status:
   - :completed
   - :on_hold
   - :called_off
+  
+event_status:
+  - :planned
+  - :started
+  - :completed
+  - :on_hold
+  - :called_off
 
 campaign_status_color:
   :planned    : Gold

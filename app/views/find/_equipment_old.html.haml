@@ -1,0 +1,58 @@
+%li.highlight[equipment]
+
+  - if equipment.available?
+    .strip.active #{t :equipment_available}
+  - elsif !equipment.available
+    .strip.suspended #{t :equipment_suspended}
+  - elsif equipment.available
+    .strip.admin #{t :equipment_admin}
+  - else
+    .strip.signed_up #{t :equipment_active}
+
+  = image_tag(equipment.avatar, :size => :medium, :width => 30, :height => 30 ) if !equipment.avatar.blank?
+
+  .indentfull
+    .tools
+      = link_to_edit(equipment, :url => edit_equipment_path(equipment)) << " | "
+
+      / - if equipment.suspended?
+      /   = link_to_reactivate(equipment) << " | "
+      / - elsif equipment != @current_equipment
+      /   = link_to_suspend(equipment) << " | "
+      / - else
+      /   = "<font color='silver'>#{t :suspend}!</font> | ".html_safe
+
+      / - if equipment != @current_equipment
+      /   = link_to_confirm(equipment)
+      / - else
+      /   %span.grayed #{t :delete}?
+
+    %span.black #{link_to(h(equipment.name), equipment)}
+    / = (#{equipment.equipment_type.name}) if equipment.equipment_type
+    %tt
+      = "- #{h(equipment.description)}" unless equipment.description.blank?
+      / = " " + t(:at) + " " + h(equipment.company) unless equipment.company.blank?
+
+      / %span.black= "|"
+      / - if equipment.last_request_at && equipment.login_count > 0
+      /   = t('pluralize.login', equipment.login_count)
+      /   %span.black= "|"
+
+      / - if equipment.awaits_approval?
+      /   %b.cool #{t :equipment_awaits_approval}
+      / - elsif equipment.last_request_at
+      /   %span.cool #{t(:last_seen, time_ago_in_words(equipment.last_request_at))}
+      / - else
+      /   %span.warn #{t :equipment_never_logged_in}
+    / %dt{ :style => "padding: 2px 0px 0px 0px" }
+    /   = link_to_email(equipment.email.to_s) << " | "
+    /   = "#{t :phone_small}: <b>".html_safe + equipment.phone << "</b> | ".html_safe if equipment.phone?
+    /   = "#{t :mobile_small}: <b>".html_safe + equipment.mobile << "</b> | ".html_safe if equipment.mobile?
+    / 
+    /   - if !equipment.suspended?
+    /     %span #{t(:equipment_since, l(equipment.created_at.to_date, :format => :mmddyy))}
+    /   - elsif equipment.awaits_approval?
+    /     %b.cool #{t(:equipment_signed_up_on, l(equipment.created_at, :format => :mmddhhss))}
+    /   - else
+    /     %span.warn #{t(:equipment_suspended_on, l(equipment.created_at.to_date, :format => :mmddyy))}
+<br />

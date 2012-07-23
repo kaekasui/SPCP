@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120712202033) do
+ActiveRecord::Schema.define(:version => 20120723012808) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -208,7 +208,45 @@ ActiveRecord::Schema.define(:version => 20120712202033) do
     t.string   "equipmentable_type"
     t.string   "image"
     t.string   "avatar"
+    t.integer  "condition"
+    t.boolean  "assistance"
+    t.text     "description"
+    t.string   "manufacturer"
+    t.boolean  "available"
+    t.integer  "equipment_type_id"
   end
+
+  create_table "equipment_types", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "events", :force => true do |t|
+    t.string   "uuid",                :limit => 36
+    t.integer  "user_id"
+    t.integer  "assigned_to"
+    t.string   "name",                :limit => 64,                                :default => "",       :null => false
+    t.string   "access",              :limit => 8,                                 :default => "Public"
+    t.string   "status",              :limit => 64
+    t.decimal  "budget",                            :precision => 12, :scale => 2
+    t.integer  "target_leads"
+    t.float    "target_conversion"
+    t.decimal  "target_revenue",                    :precision => 12, :scale => 2
+    t.integer  "leads_count"
+    t.integer  "opportunities_count"
+    t.decimal  "revenue",                           :precision => 12, :scale => 2
+    t.date     "starts_on"
+    t.date     "ends_on"
+    t.text     "objectives"
+    t.datetime "deleted_at"
+    t.datetime "created_at",                                                                             :null => false
+    t.datetime "updated_at",                                                                             :null => false
+  end
+
+  add_index "events", ["assigned_to"], :name => "index_events_on_assigned_to"
+  add_index "events", ["user_id", "name", "deleted_at"], :name => "index_events_on_user_id_and_name_and_deleted_at", :unique => true
 
   create_table "field_groups", :force => true do |t|
     t.string   "name",       :limit => 64

@@ -79,6 +79,9 @@ class EntitiesController < ApplicationController
   #----------------------------------------------------------------------------
   def leads
   end
+  
+  def events
+  end
 
   # GET /entities/opportunities                                            AJAX
   #----------------------------------------------------------------------------

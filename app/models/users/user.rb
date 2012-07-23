@@ -152,6 +152,10 @@ class User < ActiveRecord::Base
   def set_single_access_token
     self.single_access_token ||= update_attribute(:single_access_token, Authlogic::Random.friendly_token)
   end
+  
+  def address
+    return "#{street}: #{city}, #{province} #{country}"
+  end
 
   private
 

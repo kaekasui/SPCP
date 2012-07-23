@@ -1,0 +1,16 @@
+- objectives = []
+- objectives << t(:revenue_number, number_to_currency(event.target_revenue, :precision => 0)) if event.target_revenue
+- objectives << t('pluralize.lead', :count => event.target_leads) if event.target_leads
+- objectives << t(:conversion_number, number_to_percentage(event.target_conversion, :precision => 1)) if event.target_conversion
+- unless objectives.empty?
+  %dt
+    %b #{t :target}:
+    = objectives.join(" | ")
+%dt
+  - unless objectives.empty?
+    %b #{t :actual}:
+  = t(:revenue_number, number_to_currency(event.revenue || 0, :precision => 0)) + " | "
+  = t('pluralize.lead', event.leads_count || 0) + " | "
+  = t('pluralize.opportunity', event.opportunities_count || 0)
+  - if event.opportunities_count? && event.leads_count? && event.leads_count != 0
+    = " | " << t(:conversion_number, number_to_percentage(event.opportunities_count * 100 / event.leads_count, :precision => 1))
