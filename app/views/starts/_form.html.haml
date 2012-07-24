@@ -1,0 +1,36 @@
+/ <%= simple_form_for(@event) do |f| %>
+/   <%= f.error_notification %>
+/ 
+/   <div class="inputs">
+/   </div>
+/ 
+/   <div class="actions">
+/     <%= f.button :submit %>
+/   </div>
+/ <% end %>
+
+= simple_form_for(@event, :html => one_submit_only(:event)) do |f|
+  = f.hidden_field :user_id, :value => current_user.id
+
+  = f.error_messages :object_name => t('event')
+
+  = render "events/top_section", :f => f
+  = render "shared/add_comment", :f => f
+  = render "events/objectives",  :f => f
+  = render "fields/groups",  :f => f
+  = render "events/permissions", :f => f
+
+  .buttonbar
+    = f.submit t(:create_event)
+
+%h3 Things this project requires:
+%h4 When the project starts we will search our database for these items.
+- @equipment_types.each do |type|
+  %li
+    = type.name
+%br/
+:javascript
+  crm.date_select_popup("event_starts_on");
+  crm.date_select_popup("event_ends_on")
+  
+

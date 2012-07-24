@@ -78,9 +78,9 @@
     %dt= number_to_currency(@event.revenue, :precision => 0) || t(:n_a)
     %tt== #{t :revenue}: #{performance(@event.revenue, @event.target_revenue)}
 
-  - unless @event.background_info.blank?
-    .caption #{t :background_info}
-    = auto_link(simple_format @event.background_info).html_safe
+  / - unless @event.background_info.blank?
+  /   .caption #{t :background_info}
+  /   = auto_link(simple_format @event.background_info).html_safe
 
   = render "fields/sidebar_show", :asset => @event
 

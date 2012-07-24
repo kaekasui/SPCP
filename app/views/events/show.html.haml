@@ -8,17 +8,17 @@
 
 %div#edit_event{ hidden }
 
-= render "comments/new", :commentable => @event
-= render :partial => "shared/timeline", :collection => @timeline
+/ = render "comments/new", :commentable => @event
+/ = render :partial => "shared/timeline", :collection => @timeline
 
 = hook(:show_event_bottom, self) do
 
   = render :partial => "tasks/tasks", :locals => {:object => @event}
 
-  = render :partial => "leads/leads", :locals => {:object => @event}
+  / = render :partial => "leads/leads", :locals => {:object => @event}
 
-  = render :partial => "opportunities/opportunities", :locals => {:object => @event}
+  / = render :partial => "opportunities/opportunities", :locals => {:object => @event}
 
-  = render :partial => "versions/versions", :locals => {:object => @event}
+  / = render :partial => "versions/versions", :locals => {:object => @event}
 
-  = load_select_popups_for(@event, :tasks, :leads, :opportunities)
+  / = load_select_popups_for(@event, :tasks, :leads, :opportunities)

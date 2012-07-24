@@ -1,0 +1,7 @@
+%h1 Start a new project
+%p Here you can start a project. We have defined some projects and it will find all the required people and equipment for you. 
+
+= form_tag("starts/new", :method => :get) do
+  = select("event_type", "event_type_id", EventType.all.collect {|e| [e.name, e.id] }, {:include_blank => false})
+  = submit_tag 'Start Project'
+/ = link_to 'New Project', new_start_path

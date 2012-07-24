@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723012808) do
+ActiveRecord::Schema.define(:version => 20120724152312) do
 
   create_table "account_contacts", :force => true do |t|
     t.integer  "account_id"
@@ -223,6 +223,20 @@ ActiveRecord::Schema.define(:version => 20120723012808) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "event_equipments", :force => true do |t|
+    t.integer  "event_type_id"
+    t.integer  "equipment_type_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "event_types", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "events", :force => true do |t|
     t.string   "uuid",                :limit => 36
     t.integer  "user_id"
@@ -243,6 +257,7 @@ ActiveRecord::Schema.define(:version => 20120723012808) do
     t.datetime "deleted_at"
     t.datetime "created_at",                                                                             :null => false
     t.datetime "updated_at",                                                                             :null => false
+    t.integer  "event_type_id"
   end
 
   add_index "events", ["assigned_to"], :name => "index_events_on_assigned_to"
@@ -394,6 +409,11 @@ ActiveRecord::Schema.define(:version => 20120723012808) do
   end
 
   add_index "settings", ["name"], :name => "index_settings_on_name"
+
+  create_table "starts", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

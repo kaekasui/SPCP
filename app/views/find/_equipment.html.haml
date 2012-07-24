@@ -9,4 +9,5 @@
   = equipment.owner.address
   %p=  link_to equipment.owner.name, user_path(equipment.owner)
   = image_tag equipment.avatar, :width => '60' if !equipment.avatar.blank?
-  %button Book it!
+  %br/
+  %button Request it!

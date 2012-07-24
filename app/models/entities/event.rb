@@ -48,6 +48,7 @@ class Event < ActiveRecord::Base
   has_many    :leads, :dependent => :destroy, :order => "id DESC"
   has_many    :opportunities, :dependent => :destroy, :order => "id DESC"
   has_many    :emails, :as => :mediator
+  belongs_to :event_type
 
   serialize :subscribed_users, Set
 
@@ -75,6 +76,7 @@ class Event < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => [ :user_id, :deleted_at ]
   validate :start_and_end_dates
   validate :users_for_shared_access
+  attr_accessible :user_id
 
   # Default values provided through class methods.
   #----------------------------------------------------------------------------
@@ -93,6 +95,10 @@ class Event < ActiveRecord::Base
         [ attachment ]
       end
     end
+  end
+  
+  def type
+    event_type
   end
 
   # Discard given attachment from the event.

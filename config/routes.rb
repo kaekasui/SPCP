@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :starts
+  match 'start' => "starts#index"
+
   match "guides" => "guides#index"
   match "free" => "free#index"
   match "start" => "start#index"

@@ -30,11 +30,12 @@ class EventsController < ApplicationController
   # GET /events/1
   #----------------------------------------------------------------------------
   def show
+    @event = Event.find(params[:id])
     respond_with(@event) do |format|
       format.html do
         @stage = Setting.unroll(:opportunity_stage)
         @comment = Comment.new
-        @timeline = timeline(@event)
+        # @timeline = timeline(@event)
       end
     end
   end
